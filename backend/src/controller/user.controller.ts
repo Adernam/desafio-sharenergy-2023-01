@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/user.business";
-import { userLogin } from "../types/user-login.type";
+import { userDTO } from "../types/user-login.type";
 
 export class UserController {
   constructor(private userBusiness: UserBusiness) {}
@@ -8,7 +8,7 @@ export class UserController {
   signup = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    const input: userLogin = {
+    const input: userDTO = {
       username,
       password,
     };

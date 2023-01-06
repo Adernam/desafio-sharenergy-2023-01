@@ -1,6 +1,6 @@
-import { userLogin } from "../types/user-login.type";
+import { userDTO } from "../types/user-login.type";
 
-export class Validations {
+export class UserValidations {
   private passContainsSymbol(pass: string) {
     return /[!@#$%^&*]/.test(pass);
   }
@@ -9,15 +9,11 @@ export class Validations {
     return /[0-9]/.test(pass);
   }
 
-  validate(input: userLogin) {
+  validate(input: userDTO) {
     const { username, password } = input;
 
-    if (!username) {
+    if (![username, password]) {
       throw new Error("Please check the username field.");
-    }
-
-    if (!password) {
-      throw new Error("Please check the password field.");
     }
 
     if (username.length < 3) {

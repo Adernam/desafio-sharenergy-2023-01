@@ -1,8 +1,9 @@
+import { userDTO } from "types/user-login.type";
 import { dataSource } from "../data-source";
 import { User } from "../entity/user.entity";
 
 export class UserData {
-  createUser = async (user: User) => {
+  createUser = async (user: userDTO) => {
     const { username, password } = user;
 
     try {

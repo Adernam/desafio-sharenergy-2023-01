@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import { userRoute } from "./routes";
+import { clientRoute } from "./routes/client.route";
 
 dotenv.config();
 
@@ -13,3 +14,4 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/user", userRoute);
+app.use("/client", clientRoute);
