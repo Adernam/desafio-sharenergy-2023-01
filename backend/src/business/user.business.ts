@@ -1,10 +1,9 @@
 import { UserData } from "../data";
-import { Validations } from "../helpers";
+import { UserValidations } from "../helpers";
 import { Authenticator } from "../services";
 import { HashManager, IdGenerator } from "../services/";
-import { userLogin } from "../types/user-login.type";
 import { User } from "../entity/user.entity";
-import { dataSource } from "../data-source";
+import { userDTO } from "types/user-login.type";
 
 export class UserBusiness {
   constructor(
@@ -12,13 +11,13 @@ export class UserBusiness {
     private idGenerator: IdGenerator,
     private hashManager: HashManager,
     private authenticator: Authenticator,
-    private validations: Validations
+    private userValidations: UserValidations
   ) {}
 
-  signup = async (input: userLogin) => {
+  signup = async (input: userDTO) => {
     const { username, password } = input;
 
-    this.validations.validate(input);
+    this.userValidations.validate(input);
 
     const registeredUser = await this.userData.getUserByName(username);
 
@@ -28,8 +27,7 @@ export class UserBusiness {
 
     const idUser = this.idGenerator.generateId();
     const hashedPassword = await this.hashManager.hash(password);
-    const user: User = {
-      id: idUser,
+    const user: userDTO = {
       username,
       password: hashedPassword,
     };
@@ -41,7 +39,7 @@ export class UserBusiness {
     return token;
   };
 
-  login = async (user: userLogin): Promise<string> => {
+  login = async (user: userDTO): Promise<string> => {
     const { username, password } = user;
 
     if (!username || !password) {
@@ -51,7 +49,7 @@ export class UserBusiness {
     const loadedUser: User = await new UserData().getUserByName(username);
 
     if (!loadedUser) {
-      throw new Error("Invalid username or password!");
+      throw new Error("User not found. Do you already have an account ?");
     }
 
     const comparePass = await this.hashManager.compare(

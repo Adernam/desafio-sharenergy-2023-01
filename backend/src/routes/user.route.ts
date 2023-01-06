@@ -2,7 +2,7 @@ import express from "express";
 import { UserBusiness } from "../business";
 import { UserController } from "../controller";
 import { UserData } from "../data";
-import { Validations } from "../helpers";
+import { UserValidations } from "../helpers";
 import { TokenValidator } from "../middlewares";
 import { HashManager, Authenticator, IdGenerator } from "../services";
 
@@ -13,7 +13,7 @@ const userBusiness = new UserBusiness(
   new IdGenerator(),
   new HashManager(),
   new Authenticator(),
-  new Validations()
+  new UserValidations()
 );
 
 const userController = new UserController(userBusiness);
@@ -23,5 +23,4 @@ userRoute.post("/login", userController.login);
 userRoute.post("/signup", userController.signup);
 
 userRoute.use("/", tokenValidator.validate);
-
 export { userRoute };

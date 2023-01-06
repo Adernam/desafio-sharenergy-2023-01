@@ -9,12 +9,33 @@ services:
     ports:
       - '27018:27017'
 
+  redis:
+    hostname: redis
+    image: redis:4.0.10-alpine
+    volumes:
+      - ./data:/var/lib/redis
+    command: redis-server --appendonly yes
+    ports:
+      - '6379:6379'
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=root
+      - HTTP_PASSWORD=qwerty
+    ports:
+      - 8082:8081
+    depends_on:
+      - redis
+
   app:
     image: node:16-alpine
     working_dir: /home/node/app
     restart: always
     depends_on:
       - 'mongo'
+      - 'redis'
     # command: ash -c "yarn install --production && yarn start"
     command: ash -c "yarn start"
     volumes:

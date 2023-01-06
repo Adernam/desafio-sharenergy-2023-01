@@ -1,7 +1,7 @@
 import { Entity, ObjectIdColumn, Column } from "typeorm";
 
 @Entity()
-export class User {
+export class Client {
   @ObjectIdColumn()
   id: string;
 
@@ -9,5 +9,14 @@ export class User {
   username: string;
 
   @Column()
-  password: string;
+  email: string;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  address: string;
+
+  @Column()
+  cpf: string;
 }
