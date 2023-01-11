@@ -1,4 +1,4 @@
-import { userDTO } from "types/user-login.type";
+import { userDTO } from "types/userDTO.type";
 import { dataSource } from "../data-source";
 import { User } from "../entity/user.entity";
 

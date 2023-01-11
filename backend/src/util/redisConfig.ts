@@ -12,9 +12,9 @@ async function set(key: string, value: string) {
 }
 
 async function get(key: string) {
-  return redis.get(key, (err, result) => {
-    if (err) {
-      console.log(err);
+  return redis.get(key, (error, result) => {
+    if (error) {
+      console.log(error);
     } else {
       return result;
     }

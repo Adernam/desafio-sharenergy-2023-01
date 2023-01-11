@@ -41,6 +41,19 @@ export class ClientController {
     }
   };
 
+  getClientById = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const id = req.body.id;
+
+      const clients = await this.clientBusiness.getClientById(id);
+
+      res.status(200).send({ clients });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error.message || error.sqlMessage);
+    }
+  };
+
   updateClient = async (req: Request, res: Response): Promise<void> => {
     try {
       const { clientId, username, email, phone, address, cpf } = req.body;

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: gray;
+  background: lightgray;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 
   @media screen and (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
@@ -19,7 +19,7 @@ export const Box = styled.div`
   width: 400px;
   border-radius: 20px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
   padding: 20px 20px;
@@ -37,6 +37,13 @@ export const DivLogo = styled.img`
 
 export const Input = styled.input`
   width: 90%;
+  font-size: 15px;
+  padding: 12px 0 5px 10px;
+  border-radius: 5px;
+  border-width: 1px;
+`;
+
+export const InputDog = styled.input`
   font-size: 15px;
   padding: 12px 0 5px 10px;
   border-radius: 5px;
@@ -74,13 +81,6 @@ export const ButtonSignUp = styled.button`
   }
 `;
 
-export const DivRow = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
 export const DivButtons = styled.div`
   width: 100%;
   display: flex;
@@ -94,39 +94,6 @@ export const ButtonLeft = styled.button`
   height: 30px;
   border-radius: 5px;
   border: none;
-  /* margin-right: 70%; */
-  margin-top: 10px;
-  color: white;
-
-  :hover {
-    cursor: pointer;
-    background: #008de5;
-  }
-`;
-
-export const ButtonRight = styled.button`
-  background: #0070ba;
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
-  border: none;
-  /* margin-right: 70%; */
-  margin-top: 10px;
-  color: white;
-
-  :hover {
-    cursor: pointer;
-    background: #008de5;
-  }
-`;
-
-export const buttonNext = styled.button`
-  background: #0070ba;
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 80%;
   margin-top: 10px;
   color: white;
 
@@ -137,17 +104,21 @@ export const buttonNext = styled.button`
 `;
 
 export const Li = styled.li`
-  /* background-color: blue; */
   width: 100%;
   margin-right: 90%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 10px;
   list-style: none;
+
+  img {
+    border-radius: 20%;
+    height: 100px;
+  }
 `;
 
 export const Ul = styled.ul`
-  /* background-color: red; */
   width: 100%;
   padding: 0;
 `;

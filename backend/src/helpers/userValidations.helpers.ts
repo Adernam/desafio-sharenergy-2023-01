@@ -1,4 +1,4 @@
-import { userDTO } from "../types/user-login.type";
+import { userDTO } from "../types/userDTO.type";
 
 export class UserValidations {
   private passContainsSymbol(pass: string) {

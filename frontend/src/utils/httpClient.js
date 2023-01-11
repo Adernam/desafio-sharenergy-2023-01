@@ -28,10 +28,7 @@ httpClient.interceptors.response.use(
       error.response &&
       (error.response.status === 401 || error.response.status === 403)
     ) {
-      window.alert(
-        "Sua sessão expirou, por favor faça login novamente.",
-        "error"
-      );
+      window.alert("Your session has expired, please login again.", "error");
       localStorage.removeItem("token");
       navigate("/");
     }
