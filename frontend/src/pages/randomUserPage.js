@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import httpClient from "../utils/httpClient";
 import { logout } from "../utils/useLogout";
+import { useProtectPage } from "../utils/useValidate";
 import {
   Box,
   DefaultButton,
   Container,
-  DivRow,
   DivButtons,
   Ul,
   Li,
   ButtonLeft,
-  ButtonRight,
 } from "./styles/styles";
 
 export default function Transfer() {
+  useProtectPage();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
@@ -44,10 +44,16 @@ export default function Transfer() {
       return (
         <Ul key={user.id?.value}>
           <Li>
-            <p>
-              Name: {user.name?.first} {user.name?.last}
-            </p>
-            <p>Email: {user.email}</p>
+            <div>
+              <p>
+                Name: {user.name?.first} {user.name?.last}
+              </p>
+              <p>Email: {user.email}</p>
+              <p>Age: {user.dob.age}</p>
+            </div>
+            <div>
+              <img src={user.picture.large} />
+            </div>
           </Li>
         </Ul>
       );
@@ -65,9 +71,6 @@ export default function Transfer() {
         <DivButtons>
           <ButtonLeft onClick={onClickLogout}>Logout</ButtonLeft>
           <DefaultButton onClick={getUsers}>Generate user</DefaultButton>
-          <ButtonRight onClick={() => navigate("/StatusCodePage")}>
-            Next Page
-          </ButtonRight>
         </DivButtons>
       </Box>
     </Container>

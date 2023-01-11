@@ -46,7 +46,6 @@ export default function Login() {
       .post(url, body)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        console.log(res);
         navigate("/RandomUser");
       })
       .catch((res) => {

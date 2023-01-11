@@ -3,7 +3,7 @@ import { UserValidations } from "../helpers";
 import { Authenticator } from "../services";
 import { HashManager, IdGenerator } from "../services/";
 import { User } from "../entity/user.entity";
-import { userDTO } from "types/user-login.type";
+import { userDTO } from "types/userDTO.type";
 
 export class UserBusiness {
   constructor(

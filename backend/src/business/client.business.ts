@@ -1,4 +1,3 @@
-import { IdGenerator } from "../services";
 import { ClientData } from "../data/client.data";
 import { set, get } from "../util/redisConfig";
 import { ClientDTO } from "types/clientDTO.type";
@@ -8,7 +7,6 @@ import { ClientValidations } from "helpers";
 export class ClientBusiness {
   constructor(
     private clientData: ClientData,
-    private idGenerator: IdGenerator,
     private clientValidations: ClientValidations
   ) {}
 
@@ -21,11 +19,11 @@ export class ClientBusiness {
       throw new Error("Please check all the fields.");
     }
 
-    // const registeredClient = await this.clientData.getClientByCpf(cpf);
+    const registeredClient = await this.clientData.getClientByCpf(cpf);
 
-    // if (registeredClient) {
-    //   throw new Error("CPF already registered!");
-    // }
+    if (registeredClient) {
+      throw new Error("CPF already registered!");
+    }
 
     const clientDone: ClientDTO = {
       username,
@@ -54,6 +52,12 @@ export class ClientBusiness {
     } else {
       return JSON.parse(redisClientsString);
     }
+  };
+
+  getClientById = async (id: string) => {
+    const client = await this.clientData.getClientById(id);
+
+    return client;
   };
 
   updateClient = async (client: Client) => {
